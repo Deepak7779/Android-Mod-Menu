@@ -17,7 +17,11 @@
 #include "Menu/Jni.hpp"
 #include "Includes/Macros.h"
 #include "dobby.h"
-
+float speed = 1.0f;
+void (*old_set_timeScale)(float value);
+void set_timeScale(float value) {
+    old_set_timeScale(value * speed);
+}
 int scoreMul = 1, coinsMul = 1;
 
 // Do not change or translate the first text unless you know what you are doing
@@ -31,6 +35,7 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
     jobjectArray ret;
 
     const char *features[] = {
+	        OBFUSCATE("100_SeekBar_Game speed_1_4"),
             OBFUSCATE("Toggle_No death"),
             OBFUSCATE("Button_Start Invcibility (30 sec duration)"),
             OBFUSCATE("SeekBar_Score multiplier_1_100"),
