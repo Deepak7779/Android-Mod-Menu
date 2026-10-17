@@ -102,6 +102,9 @@ bool btnPressed = false;
 void Changes(JNIEnv *env, jclass clazz, jobject obj, jint featNum, jstring featName, jint value, jlong Lvalue, jboolean boolean, jstring text) {
 
     switch (featNum) {
+		case 500:
+    speed = (float)value;
+    break;
         case 0:
             // offset, hex
             PATCH_SWITCH(targetLibName, "0x1079728", "C0 03 5F D6", boolean);
@@ -246,18 +249,18 @@ void hack_thread() {
     // You can modify the "Active ABI" in "Build Variants" to switch to another architecture for parsing.
 #if defined(__aarch64__)
     //Il2Cpp: Use RVA offset
-    StartInvcibility = (void (*)(void *, float)) getAbsoluteAddress(targetLibName, OBFUSCATE("0x107A3BC"));
-    StartInvcibility = (void (*)(void *, float)) getAbsoluteAddress(targetLibName, OBFUSCATE("_characterPlayer_Update"));
+    //StartInvcibility = (void (*)(void *, float)) getAbsoluteAddress(targetLibName, OBFUSCATE("0x107A3BC"));
+    //StartInvcibility = (void (*)(void *, float)) getAbsoluteAddress(targetLibName, OBFUSCATE("_characterPlayer_Update"));
 
-    HOOK(targetLibName, "0x107A2FC", AddCoins, old_AddCoins);
+    //HOOK(targetLibName, "0x107A2FC", AddCoins, old_AddCoins);
 
     // HOOK(targetLibName, "0x107A2E0", AddScore, old_AddScore);
     // === This function was completely replaced with super-macro `install_hook_name` from dobby.h ===
     // don't forget set address for install_hook:
     // ! getAbsoluteAddress not have OBFUSCATE, so don't forget use his here
-    install_hook_AddScore(getAbsoluteAddress(targetLibName,OBFUSCATE("0x107A2E0")));
+    //install_hook_AddScore(getAbsoluteAddress(targetLibName,OBFUSCATE("0x107A2E0")));
 
-    HOOK(targetLibName, "0x1078C44", Update, old_Update);
+    //HOOK(targetLibName, "0x1078C44", Update, old_Update);
     //HOOK(targetLibName, "0x1079728", Kill, old_Kill);
     //HOOK(targetLibName, "_example__sym", Kill, old_Kill);
     //HOOK_NO_ORIG("libFileC.so", "0x123456", FunctionExample);
@@ -265,8 +268,8 @@ void hack_thread() {
 
     //PATCH(targetLibName, "0x10709AC", "E05F40B2C0035FD6");
 
-    INST(targetLibName, "0x23558C", "AnyNameForDetect", true);
-
+    //INST(targetLibName, "0x23558C", "AnyNameForDetect", true);
+ HOOK(targetLibName, "0x3BFB9C0", set_timeScale, old_set_timeScale);
     // LOGI(OBFUSCATE("Test SYM: 0x%llx"), (uintptr_t)getAbsoluteAddress(OBFUSCATE("libil2cpp.so"), OBFUSCATE("il2cpp_init")));
 #elif defined(__arm__)
     //Put your code here if you want the code to be compiled for armv7 only
