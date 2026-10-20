@@ -269,7 +269,7 @@ void hack_thread() {
     //PATCH(targetLibName, "0x10709AC", "E05F40B2C0035FD6");
 
     //INST(targetLibName, "0x23558C", "AnyNameForDetect", true);
- HOOK(targetLibName, "0x3BFB9C0", set_timeScale, old_set_timeScale);
+    //HOOK(targetLibName, "0x3BFB9C0", set_timeScale, old_set_timeScale);
     // LOGI(OBFUSCATE("Test SYM: 0x%llx"), (uintptr_t)getAbsoluteAddress(OBFUSCATE("libil2cpp.so"), OBFUSCATE("il2cpp_init")));
 #elif defined(__arm__)
     //Put your code here if you want the code to be compiled for armv7 only
